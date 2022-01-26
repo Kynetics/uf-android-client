@@ -8,7 +8,7 @@
   -->
 
 <resources>
-    <string name="app_name">Update Factory ui client</string>
+    <string name="app_name">Update Factory UI client</string>
     <string name="download_title">New update available</string>
     <string name="download_content">New update is available to download.\nUpdates include new features, improvements and bug fixes.\nClick OK to download the update now.</string>
     <string name="update_title">Update Authorization</string>
