@@ -27,6 +27,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 19
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
         versionCode 28
         versionName version
