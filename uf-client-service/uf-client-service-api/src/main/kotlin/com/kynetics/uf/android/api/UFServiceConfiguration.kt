@@ -34,7 +34,7 @@ import kotlinx.serialization.json.JsonException
 data class UFServiceConfiguration(
         val tenant: String,
         val controllerId: String,
-        @Deprecated("As of release 1.0.0-RC repalced by exponential backoff")
+        @Deprecated("As of release 1.0.0-RC replaced by exponential backoff")
         val retryDelay: Long,
         val url: String,
         val targetToken: String,
