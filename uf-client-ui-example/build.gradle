@@ -1,3 +1,5 @@
+import java.util.function.Predicate
+
 /*
  * Copyright © 2017-2020  Kynetics  LLC
  *
@@ -31,16 +33,25 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
 
-    def isRunningOnTravis = System.getenv("CI") == "true"
+    def KyneticsKeystorePass = System.getenv("KYNETICS_KEYSTORE_PASS")
+    def KyneticsKeyAlias = System.getenv("KYNETICS_KEY_ALIAS")
+    def KyneticsKeyPass = System.getenv("KYNETICS_KEY_PASS")
+
+    def envs= [KyneticsKeystorePass, KyneticsKeyAlias, KyneticsKeyPass]
+    def signWithKyneticsKey = envs.stream().allMatch(new Predicate<String>() {
+            @Override
+            boolean test(String s) {
+                return s != null && !s.isEmpty()
+            }
+        })
 
     signingConfigs{
-
-        if (isRunningOnTravis) {
+        if (signWithKyneticsKey) {
             kynetics {
-                storePassword System.getenv("uf_store_password")
-                keyAlias System.getenv("kynetics_alias")
-                keyPassword System.getenv("kynetics_key_password")
-                storeFile file('../travis/uf_keystore.jks')
+                storePassword System.getenv("KYNETICS_KEYSTORE_PASS")
+                keyAlias System.getenv("KYNETICS_KEY_ALIAS")
+                keyPassword System.getenv("KYNETICS_KEY_PASS")
+                storeFile file('../keystore/kynetics.jks')
                 v2SigningEnabled true
                 v1SigningEnabled true
             }
@@ -64,7 +75,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-        if (isRunningOnTravis) {
+        if (signWithKyneticsKey) {
             kynetics_key {
                 signingConfig signingConfigs.kynetics
                 minifyEnabled false
@@ -75,7 +86,7 @@ android {
             debug{
                 minifyEnabled false
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-                if(isRunningOnTravis){
+                if(project.properties.containsKey("uf-android-client-ui.storePath")){
                     signingConfig signingConfigs.debug
                 }
             }
