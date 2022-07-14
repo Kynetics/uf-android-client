@@ -32,28 +32,25 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    def isRunningOnTravis = System.getenv("CI") == "true"
-
     signingConfigs {
-        if (isRunningOnTravis) {
-            nxp_platform {
-                storePassword System.getenv("uf_store_password")
-                keyAlias System.getenv("nxp_alias")
-                keyPassword System.getenv("nxp_key_password")
-                storeFile file('../travis/uf_keystore.jks')
-                v2SigningEnabled true
-                v1SigningEnabled true
-            }
+        nxp_platform {
+            storePassword "keystore"
+            keyAlias "platform_nxp"
+            keyPassword "keystore"
+            storeFile file('../keystore/public.jks')
+            v2SigningEnabled true
+            v1SigningEnabled true
+        }
 
-            aosp_platform {
-                storePassword System.getenv("uf_store_password")
-                keyAlias System.getenv("aosp_alias")
-                keyPassword System.getenv("asop_key_password")
-                storeFile file('../travis/uf_keystore.jks')
-                v2SigningEnabled true
-                v1SigningEnabled true
-            }
-        } else if(project.properties.containsKey("uf-android-client-service.storePath")){
+        aosp_platform {
+            storePassword "keystore"
+            keyAlias "platform_aosp"
+            keyPassword "keystore"
+            storeFile file('../keystore/public.jks')
+            v2SigningEnabled true
+            v1SigningEnabled true
+        }
+        if(project.properties.containsKey("uf-android-client-service.storePath")){
             debug {
                 keyAlias project.properties['uf-android-client-service.keyAlias']
                 keyPassword project.properties['uf-android-client-service.keyPassword']
@@ -83,27 +80,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-        if (isRunningOnTravis) {
-            nxp_platform_key {
-                signingConfig signingConfigs.nxp_platform
-                minifyEnabled false
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-                matchingFallbacks = ['release', 'debug']
-            }
-
-            aosp_platform_key {
-                signingConfig signingConfigs.aosp_platform
-                minifyEnabled false
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-                matchingFallbacks = ['release', 'debug']
-            }
-        } else {
-            debug{
-                minifyEnabled false
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-                signingConfig signingConfigs.debug
-            }
+        nxp_platform_key {
+            signingConfig signingConfigs.nxp_platform
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            matchingFallbacks = ['release', 'debug']
         }
+
+        aosp_platform_key {
+            signingConfig signingConfigs.aosp_platform
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            matchingFallbacks = ['release', 'debug']
+        }
+
+        debug{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+
     }
 }
 
@@ -134,5 +130,4 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     implementation 'androidx.multidex:multidex:2.0.1'
 }
-
 
