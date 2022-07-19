@@ -50,18 +50,6 @@ android {
             v2SigningEnabled true
             v1SigningEnabled true
         }
-        if(project.properties.containsKey("uf-android-client-service.storePath")){
-            debug {
-                keyAlias project.properties['uf-android-client-service.keyAlias']
-                keyPassword project.properties['uf-android-client-service.keyPassword']
-                storeFile file(project.properties['uf-android-client-service.storePath'])
-                storePassword project.properties['uf-android-client-service.storePassword']
-                v2SigningEnabled true
-                v1SigningEnabled true
-            }
-
-        }
-
     }
 
     defaultConfig{
@@ -97,7 +85,6 @@ android {
         debug{
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
         }
 
     }

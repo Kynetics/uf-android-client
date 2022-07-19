@@ -55,16 +55,6 @@ android {
                 v2SigningEnabled true
                 v1SigningEnabled true
             }
-
-        } else if(project.properties.containsKey("uf-android-client-ui.storePath")){
-            debug {
-                keyAlias project.properties['uf-android-client-ui.keyAlias']
-                keyPassword project.properties['uf-android-client-ui.keyPassword']
-                storeFile file(project.properties['uf-android-client-ui.storePath'])
-                storePassword project.properties['uf-android-client-ui.storePassword']
-                v2SigningEnabled true
-                v1SigningEnabled true
-            }
         }
     }
 
@@ -82,14 +72,10 @@ android {
                 proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
                 matchingFallbacks = ['release', 'debug']
             }
-        } else {
-            debug{
-                minifyEnabled false
-                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-                if(project.properties.containsKey("uf-android-client-ui.storePath")){
-                    signingConfig signingConfigs.debug
-                }
-            }
+        }
+        debug{
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
