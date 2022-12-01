@@ -14,13 +14,13 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    api("com.github.eclipse:hara-ddiclient:4d21b0ee712144f8831c60b595ab282c9d1467e2"){
+    api("com.github.eclipse:hara-ddiclient:9fbe5198c9a6120e3b6126df104d0cf4b2257717"){
         exclude group: "org.slf4j", module: "slf4j-simple"
     }
     implementation "com.squareup.okhttp3:okhttp:4.9.3"

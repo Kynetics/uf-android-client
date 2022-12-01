@@ -28,6 +28,7 @@ class UFServiceMessageV1Test {
         UFServiceMessageV1.Event.Error(listOf("Error message")),
         UFServiceMessageV1.Event.UpdateProgress("Phase name", "description", 0.2),
         UFServiceMessageV1.Event.UpdateAvailable("7"),
+        UFServiceMessageV1.Event.NoNewState,
         UFServiceMessageV1.State.Downloading(listOf()),
         UFServiceMessageV1.State.Downloading(listOf(UFServiceMessageV1.State.Downloading.Artifact("app.apk", 7, "12"))),
         UFServiceMessageV1.State.Updating,
@@ -52,6 +53,7 @@ class UFServiceMessageV1Test {
         {"name":"ERROR","description":"An error is occurred","details":["Error message"]}
         {"name":"UPDATE_PROGRESS","description":"Phase of update","phaseName":"Phase name","phaseDescription":"description","percentage":0.2}
         {"name":"UPDATE_AVAILABLE","description":"An update is available on cloud","id":"7"}
+        {"name":"NO_NEW_STATE","description":"Server state is not changed"}
         {"name":"DOWNLOADING","description":"Client is downloading artifacts from server","artifacts":[]}
         {"name":"DOWNLOADING","description":"Client is downloading artifacts from server","artifacts":[{"name":"app.apk","size":7,"md5":"12"}]}
         {"name":"UPDATING","description":"The update process is started. Any request to cancel an update will be rejected"}

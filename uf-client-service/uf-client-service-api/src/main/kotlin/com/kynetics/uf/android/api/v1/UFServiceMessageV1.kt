@@ -52,7 +52,8 @@ sealed class UFServiceMessageV1 {
         STOPPED,
         CONFIGURATION_UPDATED,
         CANT_BE_STOPPED,
-        NEW_TARGET_TOKEN_RECEIVED
+        NEW_TARGET_TOKEN_RECEIVED,
+        NO_NEW_STATE
     }
 
     override fun toString(): String {
@@ -303,6 +304,12 @@ sealed class UFServiceMessageV1 {
          */
         @Serializable
         object NewTargetTokenReceived: Event(MessageName.NEW_TARGET_TOKEN_RECEIVED, "New target token received from the update-server")
+
+        /**
+         * The client has received a new target token from the update server.
+         */
+        @Serializable
+        object NoNewState: Event(MessageName.NO_NEW_STATE, "Server state is not changed")
     }
 
     @Serializable
@@ -350,6 +357,7 @@ sealed class UFServiceMessageV1 {
                 MessageName.CANT_BE_STOPPED.name -> json.decodeFromString(Event.CantBeStopped.serializer(), jsonContent)
                 MessageName.CONFIGURATION_UPDATED.name -> json.decodeFromString(Event.ConfigurationUpdated.serializer(), jsonContent)
                 MessageName.NEW_TARGET_TOKEN_RECEIVED.name -> Event.NewTargetTokenReceived
+                MessageName.NO_NEW_STATE.name -> Event.NoNewState
                 else -> throw IllegalArgumentException("$jsonContent is not obtained by toJson method of ${UFServiceMessageV1::class.java.simpleName}")
             }
         }
