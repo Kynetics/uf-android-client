@@ -23,8 +23,10 @@ import java.net.URI
 enum class VariableEvaluation {
 
     FILE {
-        override fun evaluate(uri: URI, context: Context): String {
-            return File(uri.path).bufferedReader().readLine().trim()
+        override fun evaluate(uri: URI, context: Context): String? {
+            return kotlin.runCatching {
+                File(uri.path).bufferedReader().readLine().trim()
+            }.getOrNull()
         }
     },
 
