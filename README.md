@@ -32,7 +32,6 @@ uf-client-service must be install as **SYSTEM** application.
 - **uf-client-service-api**: service API used by the third-party applications to communicate with the *uf-client-service*
 - **os-mock**: mock implementation of the Android hidden api used by the *uf-client-service*
 - **uf-ddiclient**: customization of hara-ddiclient library for Android and Update Factory
-- **uf-client-ui-example**: example graphical application that uses the uf-client-service via *uf-client-service-api*
 
 ## Third-Party Libraries
 * [hara-ddiclient](https://github.com/eclipse/hara-ddiclient) - [Eclipse Public License 2.0](https://github.com/eclipse/hara-ddiclient/blob/master/LICENSE)
