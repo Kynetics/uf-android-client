@@ -2,7 +2,7 @@
 <p align="center">
 <a href="https://github.com/Kynetics/uf-android-client/actions/workflows/pipeline-build.yml"><img alt="Build Status" src="https://github.com/Kynetics/uf-android-client/actions/workflows/pipeline-build.yml/badge.svg"></a>
 <a href="https://codeclimate.com/github/Kynetics/uf-android-client/maintainability"><img src="https://api.codeclimate.com/v1/badges/3dcb8f7ce1c2a6c9f9e2/maintainability" /></a>
-<a href="http://www.eclipse.org/legal/epl-v10.html"><img alt="License" src="https://img.shields.io/badge/License-EPL%201.0-red.svg"></a>
+<a href="https://www.eclipse.org/legal/epl-2.0"><img alt="License" src="https://img.shields.io/badge/License-EPL%202.0-red.svg"></a>
 <a href="https://jitpack.io/#kynetics/uf-android-client"><img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/kynetics/uf-android-client"></a>
 </p>
 
@@ -53,4 +53,4 @@ See also the list of [contributors](https://github.com/Kynetics/UfAndroidClient/
 ## License
 Copyright © 2017-2023, [Kynetics LLC](https://www.kynetics.com).
 
-Released under the [EPLv1 License](http://www.eclipse.org/legal/epl-v10.html).
+Released under the [EPLv2 License](https://www.eclipse.org/legal/epl-2.0).
