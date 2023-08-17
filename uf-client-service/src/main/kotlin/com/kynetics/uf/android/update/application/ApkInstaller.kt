@@ -42,6 +42,12 @@ object ApkInstaller : Installer<Unit> {
                 currentUpdateState.addErrorToRepor(errorMessage)
             }
 
+            getPackageFromApk(context, apk.absolutePath) == null -> {
+                val errorMessage = "Apk file is invalid"
+                Log.w(ApkUpdater.TAG, errorMessage)
+                currentUpdateState.addErrorToRepor(errorMessage)
+            }
+
             !verifySharedUserId(context, apk.absolutePath) -> {
                 val errorMessage = "Application was already installed with a different sharedUserId"
                 Log.w(ApkUpdater.TAG, errorMessage)
