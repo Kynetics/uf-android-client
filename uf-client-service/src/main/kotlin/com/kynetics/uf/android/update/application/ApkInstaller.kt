@@ -39,19 +39,19 @@ object ApkInstaller : Installer<Unit> {
             !apk.exists() -> {
                 val errorMessage = "Apk not found"
                 Log.w(ApkUpdater.TAG, errorMessage)
-                currentUpdateState.addErrorToRepor(errorMessage)
+                currentUpdateState.addErrorToReport(errorMessage)
             }
 
             getPackageFromApk(context, apk.absolutePath) == null -> {
                 val errorMessage = "Apk file is invalid"
                 Log.w(ApkUpdater.TAG, errorMessage)
-                currentUpdateState.addErrorToRepor(errorMessage)
+                currentUpdateState.addErrorToReport(errorMessage)
             }
 
             !verifySharedUserId(context, apk.absolutePath) -> {
                 val errorMessage = "Application was already installed with a different sharedUserId"
                 Log.w(ApkUpdater.TAG, errorMessage)
-                currentUpdateState.addErrorToRepor(errorMessage)
+                currentUpdateState.addErrorToReport(errorMessage)
             }
 
             else -> {
@@ -76,7 +76,7 @@ object ApkInstaller : Installer<Unit> {
                 ).getTimeout(null)
 
                 if (!countDownLatch.await(timeout.value, timeout.timeUnit)) {
-                    currentUpdateState.addSuccessMessageToRepor("Time to update exceeds the timeout",
+                    currentUpdateState.addSuccessMessageToReport("Time to update exceeds the timeout",
                         "Package manager timeout expired, package installation status unknown")
                     Log.w(ApkUpdater.TAG, "Time to update exceeds the timeout")
                 }

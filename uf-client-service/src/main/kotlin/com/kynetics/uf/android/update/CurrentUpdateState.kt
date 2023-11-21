@@ -33,13 +33,13 @@ class CurrentUpdateState(context: Context) {
     val distributionReportSuccess: Set<String>
         get() = sharedPreferences.getStringSet(APK_DISTRIBUTION_REPORT_SUCCESS_KEY, HashSet())!!
 
-    fun addErrorToRepor(vararg errors: String) {
+    fun addErrorToReport(vararg errors: String) {
         val newDistReportError = distributionReportError.toMutableSet()
         newDistReportError.addAll(errors)
         sharedPreferences.edit().putStringSet(APK_DISTRIBUTION_REPORT_ERROR_KEY, newDistReportError).apply()
     }
 
-    fun addSuccessMessageToRepor(vararg messages: String) {
+    fun addSuccessMessageToReport(vararg messages: String) {
         val newDistReportSuccess = distributionReportSuccess.toMutableSet()
         newDistReportSuccess.addAll(messages)
         sharedPreferences.edit().putStringSet(APK_DISTRIBUTION_REPORT_SUCCESS_KEY, newDistReportSuccess).apply()

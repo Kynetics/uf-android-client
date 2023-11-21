@@ -78,7 +78,7 @@ class ApkUpdater(context: Context) : AndroidUpdater(context) {
                     ApkInstaller.install(a, currentUpdateState, messenger, context)
                 } catch (t: Throwable) { // new client replace with IOException | IllegalArgumentException e
                     val error = "${a.filename} installation fails with error ${t.message}"
-                    currentUpdateState.addErrorToRepor(error)
+                    currentUpdateState.addErrorToReport(error)
                     currentUpdateState.packageInstallationTerminated(
                         getPackageFromApk(context, a.path),
                         getVersionFromApk(context, a.path))
