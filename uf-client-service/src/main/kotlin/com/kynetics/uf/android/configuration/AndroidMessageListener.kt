@@ -25,6 +25,7 @@ class AndroidMessageListener(private val service: UpdateFactoryService) : Messag
     private val mNotificationManager = service.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     override fun onMessage(message: MessageListener.Message) {
+        Log.i(TAG, "Message received from Hara: $message")
         when (message) {
             is MessageListener.Message.Event.UpdateFinished,
             is MessageListener.Message.State.CancellingUpdate -> {
@@ -39,7 +40,6 @@ class AndroidMessageListener(private val service: UpdateFactoryService) : Messag
         MessengerHandler.notifyHaraMessage(message)
 
         mNotificationManager.notify(UpdateFactoryService.NOTIFICATION_ID, service.getNotification(message.toString()))
-        Log.i(TAG, message.toString())
     }
 
     companion object {

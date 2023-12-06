@@ -11,7 +11,6 @@
 
 package com.kynetics.uf.android.communication.messenger
 
-import android.util.Log
 import com.kynetics.uf.android.api.UFServiceMessage
 import com.kynetics.uf.android.api.v1.UFServiceMessageV1
 import com.kynetics.uf.android.converter.toUFMessage
@@ -94,7 +93,7 @@ data class V1x(
 ) : MessageHandler<String?> {
 
     override fun onMessage(msg: MessageListener.Message): MessageHandler<String?>? {
-        return onAndroidMessage(msg.toUFMessage())
+        return mapMessage(msg.toUFMessage())
     }
 
     override fun onConfigurationError(details: List<String>): MessageHandler<String?> {
@@ -103,7 +102,10 @@ data class V1x(
     }
 
     override fun onAndroidMessage(msg: UFServiceMessageV1): MessageHandler<String?>? {
-        Log.i("v1", "onAndroidMessage $msg")
+        return mapMessage(msg)
+    }
+
+    private fun mapMessage(msg: UFServiceMessageV1): MessageHandler<String?>? {
         return when (val finalMsg = msgMapper(msg)) {
             is UFServiceMessageV1.Event -> {
                 copy(currentMessage = finalMsg.toJson())
@@ -126,9 +128,13 @@ object MessageHandlerFactory{
         msgMapper = { msg:UFServiceMessageV1 ->
             when(msg){
                 is UFServiceMessageV1.State.WaitingUpdateWindow -> UFServiceMessageV1.State.WaitingUpdateAuthorization
-                is UFServiceMessageV1.Event.Stopped, is UFServiceMessageV1.Event.Started, is UFServiceMessageV1.Event.CantBeStopped, is UFServiceMessageV1.Event.ConfigurationUpdated, is UFServiceMessageV1.Event.NewTargetTokenReceived -> null
+                is UFServiceMessageV1.Event.Stopped,
+                is UFServiceMessageV1.Event.Started,
+                is UFServiceMessageV1.Event.CantBeStopped,
+                is UFServiceMessageV1.Event.ConfigurationUpdated,
+                is UFServiceMessageV1.Event.NewTargetTokenReceived -> null
                 else -> msg
-            }.also { newMsg -> Log.i("v1", "mapping $msg to $newMsg") }
+            }
         }
     )
 
@@ -136,9 +142,13 @@ object MessageHandlerFactory{
     fun newV1_1():V1x = V1x(
         msgMapper = { msg:UFServiceMessageV1 ->
             when(msg){
-                is UFServiceMessageV1.Event.Stopped, is UFServiceMessageV1.Event.Started, is UFServiceMessageV1.Event.CantBeStopped, is UFServiceMessageV1.Event.ConfigurationUpdated, is UFServiceMessageV1.Event.NewTargetTokenReceived -> null
+                is UFServiceMessageV1.Event.Stopped,
+                is UFServiceMessageV1.Event.Started,
+                is UFServiceMessageV1.Event.CantBeStopped,
+                is UFServiceMessageV1.Event.ConfigurationUpdated,
+                is UFServiceMessageV1.Event.NewTargetTokenReceived -> null
                 else -> msg
-            }.also { newMsg -> Log.i("v1.1", "mapping $msg to $newMsg") }
+            }
         }
     )
 
