@@ -37,5 +37,6 @@ fun MessageListener.Message.toUFMessage(): UFServiceMessageV1 {
         is MessageListener.Message.Event.UpdateFinished -> UFServiceMessageV1.Event.UpdateFinished(successApply, details)
         is MessageListener.Message.Event.UpdateAvailable -> UFServiceMessageV1.Event.UpdateAvailable(id)
         is MessageListener.Message.Event.NoNewState -> UFServiceMessageV1.Event.NoNewState
+        is MessageListener.Message.Event.DeployFeedbackRequestResult -> UFServiceMessageV1.Event.DeployFeedbackRequestResult(success, id, closeAction)
     }
 }

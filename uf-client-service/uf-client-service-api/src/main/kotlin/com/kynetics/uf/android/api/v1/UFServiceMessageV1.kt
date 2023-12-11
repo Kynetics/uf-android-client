@@ -53,7 +53,8 @@ sealed class UFServiceMessageV1 {
         CONFIGURATION_UPDATED,
         CANT_BE_STOPPED,
         NEW_TARGET_TOKEN_RECEIVED,
-        NO_NEW_STATE
+        NO_NEW_STATE,
+        DEPLOY_FEEDBACK_REQUEST_RESULT
     }
 
     override fun toString(): String {
@@ -310,6 +311,22 @@ sealed class UFServiceMessageV1 {
          */
         @Serializable
         object NoNewState: Event(MessageName.NO_NEW_STATE, "Server state is not changed")
+
+        /**
+         * The result of the deployment feedback request sent to the server
+         * @property success, true if the request has been successful, false otherwise
+         * @property id, action id of the update
+         * @property closeAction, true if the feedback request execution status is Execution.closed, false otherwise
+         */
+        @Serializable
+        data class DeployFeedbackRequestResult(val success: Boolean, val id: String,
+                                               val closeAction: Boolean) :
+            Event(MessageName.DEPLOY_FEEDBACK_REQUEST_RESULT,
+                "Result of the feedback request to the server") {
+            override fun toJson(): String {
+                return json.encodeToString(serializer(), this)
+            }
+        }
     }
 
     @Serializable
@@ -358,6 +375,7 @@ sealed class UFServiceMessageV1 {
                 MessageName.CONFIGURATION_UPDATED.name -> json.decodeFromString(Event.ConfigurationUpdated.serializer(), jsonContent)
                 MessageName.NEW_TARGET_TOKEN_RECEIVED.name -> Event.NewTargetTokenReceived
                 MessageName.NO_NEW_STATE.name -> Event.NoNewState
+                MessageName.DEPLOY_FEEDBACK_REQUEST_RESULT.name -> json.decodeFromString(Event.DeployFeedbackRequestResult.serializer(), jsonContent)
                 else -> throw IllegalArgumentException("$jsonContent is not obtained by toJson method of ${UFServiceMessageV1::class.java.simpleName}")
             }
         }

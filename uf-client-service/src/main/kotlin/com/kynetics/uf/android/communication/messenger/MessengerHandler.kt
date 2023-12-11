@@ -18,12 +18,16 @@ import android.util.Log
 import com.kynetics.uf.android.api.ApiCommunicationVersion
 import com.kynetics.uf.android.api.Communication
 import com.kynetics.uf.android.api.v1.UFServiceMessageV1
+import com.kynetics.uf.android.converter.toUFMessage
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.channels.Channel
 import org.eclipse.hara.ddiclient.api.MessageListener
 import java.io.Serializable
 
 object MessengerHandler {
 
     private val TAG = MessengerHandler::class.java.simpleName
+    private const val CHANNEL_BUFFER = 10
 
     private val lastSharedMessagesByVersion = mutableMapOf(
             ApiCommunicationVersion.V0_1 to MessageHandlerFactory.newV0(),
@@ -33,7 +37,9 @@ object MessengerHandler {
     )
 
     private val mClients = mutableMapOf<Messenger, ApiCommunicationVersion>()
-
+    val internalChannel: Channel<UFServiceMessageV1> = Channel(
+        CHANNEL_BUFFER, BufferOverflow.DROP_OLDEST
+    )
     fun getlastSharedMessage(version: ApiCommunicationVersion) = lastSharedMessagesByVersion.getValue(version)
 
     fun hasMessage(version: ApiCommunicationVersion): Boolean {
@@ -50,6 +56,10 @@ object MessengerHandler {
 
     private fun updateMessage(map: (MessageHandler<Serializable?>) -> MessageHandler<Serializable?>?) = lastSharedMessagesByVersion.forEach {
         map(it.value)?.let{ newMessage ->  lastSharedMessagesByVersion[it.key] = newMessage }
+    }
+
+    fun notifyInternalChannel(msg: MessageListener.Message) {
+        internalChannel.trySend(msg.toUFMessage())
     }
 
     private fun updateMessageAndNotify(map: (MessageHandler<Serializable?>) -> MessageHandler<Serializable?>?) =

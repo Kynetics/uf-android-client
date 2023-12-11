@@ -132,7 +132,9 @@ object MessageHandlerFactory{
                 is UFServiceMessageV1.Event.Started,
                 is UFServiceMessageV1.Event.CantBeStopped,
                 is UFServiceMessageV1.Event.ConfigurationUpdated,
-                is UFServiceMessageV1.Event.NewTargetTokenReceived -> null
+                is UFServiceMessageV1.Event.NewTargetTokenReceived,
+                is UFServiceMessageV1.Event.DeployFeedbackRequestResult,
+                is UFServiceMessageV1.Event.NoNewState -> null
                 else -> msg
             }
         }
@@ -146,7 +148,9 @@ object MessageHandlerFactory{
                 is UFServiceMessageV1.Event.Started,
                 is UFServiceMessageV1.Event.CantBeStopped,
                 is UFServiceMessageV1.Event.ConfigurationUpdated,
-                is UFServiceMessageV1.Event.NewTargetTokenReceived -> null
+                is UFServiceMessageV1.Event.NewTargetTokenReceived,
+                is UFServiceMessageV1.Event.DeployFeedbackRequestResult,
+                is UFServiceMessageV1.Event.NoNewState -> null
                 else -> msg
             }
         }
