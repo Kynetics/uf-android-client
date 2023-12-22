@@ -106,6 +106,12 @@ android {
             signingConfig signingConfigs.nxp_platform
         }
     }
+
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
+            outputFileName = new File("uf-client-service-${versionFromGit(project)}-${variant.buildType.name}.apk")
+        }
+    }
 }
 
 dependencies {
