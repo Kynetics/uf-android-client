@@ -13,6 +13,7 @@ package com.kynetics.uf.android.update.application
 import android.app.PendingIntent
 import android.content.*
 import android.util.Log
+import com.kynetics.uf.android.BuildConfig
 
 object PackageInstallerBRHandler {
     const val ACTION_INSTALL_COMPLETE = "com.kynetics.action.INSTALL_COMPLETED"
@@ -21,11 +22,14 @@ object PackageInstallerBRHandler {
 
     private val intentFilter = IntentFilter(ACTION_INSTALL_COMPLETE)
     private val intent = Intent(ACTION_INSTALL_COMPLETE)
+        .apply {
+            setPackage(BuildConfig.APPLICATION_ID)
+        }
 
     fun registerReceiver(context: Context, receiver: PackageInstallerBroadcastReceiver){
         unregisterReceiver(context)
         currentReceiver = receiver
-        context.registerReceiver(currentReceiver, intentFilter)
+        context.registerReceiver(currentReceiver, intentFilter, "", null)
     }
 
     fun createIntentSender(context: Context, requestCode:Int): IntentSender {
