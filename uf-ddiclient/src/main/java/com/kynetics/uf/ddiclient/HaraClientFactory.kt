@@ -1,6 +1,6 @@
 /*
  * Copyright © 2017-2023  Kynetics  LLC
- * 
+ *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
@@ -81,11 +81,11 @@ object HaraClientFactory {
     private fun getOkHttpBuilder(listener:TargetTokenFoundListener,clientData:HaraClientData): OkHttpClient.Builder{
         val authentications = HashSet<Authentication>()
         with(clientData) {
-            if (gatewayToken != null) {
-                authentications.add(Authentication.newInstance(Authentication.AuthenticationType.GATEWAY_TOKEN_AUTHENTICATION, gatewayToken!!))
-            }
-            if (targetToken != null) {
+            if (!targetToken.isNullOrBlank()) {
                 authentications.add(Authentication.newInstance(Authentication.AuthenticationType.TARGET_TOKEN_AUTHENTICATION, targetToken!!))
+            }
+            if (!gatewayToken.isNullOrBlank()) {
+                authentications.add(Authentication.newInstance(Authentication.AuthenticationType.GATEWAY_TOKEN_AUTHENTICATION, gatewayToken!!))
             }
         }
         val authentication=UpdateFactoryAuthenticationRequestInterceptor(authentications,listener)

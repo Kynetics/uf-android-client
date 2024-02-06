@@ -30,22 +30,15 @@ class UpdateFactoryAuthenticationRequestInterceptor(
         val originalRequest = chain.request()
         val builder = originalRequest.newBuilder()
         val isConfigDataRequest = originalRequest.url.toString().endsWith(CONFIG_DATA_ACTION)
-        var targetTokenAuth: Authentication? = null
-        builder.removeHeader("Authorization")
-        authentications.filter { authentication ->
-            authentication.token.isNotBlank()
-        }.forEach { authentication ->
-            builder.addHeader(authentication.header, authentication.headerValue)
-            if (authentication.type === Authentication.AuthenticationType.TARGET_TOKEN_AUTHENTICATION) {
-                targetTokenAuth = authentication
-            }
+        val targetTokenAuth = authentications.find {
+            it.type === Authentication.AuthenticationType.TARGET_TOKEN_AUTHENTICATION
         }
         if (isConfigDataRequest || targetTokenAuth == null) {
             builder.header(TARGET_TOKEN_REQUEST_HEADER_NAME, true.toString())
         }
         val response = chain.proceed(builder.build())
         val targetToken = response.header(TARGET_TOKEN_HEADER_NAME)
-        if (targetToken != null && targetToken.isNotBlank()) {
+        if (!targetToken.isNullOrBlank()) {
             authentications.add(Authentication.newInstance(Authentication.AuthenticationType.TARGET_TOKEN_AUTHENTICATION, targetToken))
             targetTokenFoundListener.onFound(targetToken)
             authentications.remove(targetTokenAuth)
