@@ -34,7 +34,7 @@ uf-client-service must be install as **SYSTEM** application.
 - **uf-ddiclient**: customization of hara-ddiclient library for Android and Update Factory
 
 ## Third-Party Libraries
-* [hara-ddiclient](https://github.com/eclipse/hara-ddiclient) - [Eclipse Public License 2.0](https://github.com/eclipse/hara-ddiclient/blob/master/LICENSE)
+* [hara-ddiclient](https://github.com/eclipse-hara/hara-ddiclient) - [Eclipse Public License 2.0](https://github.com/eclipse-hara/hara-ddiclient/blob/master/LICENSE)
 * [slf4j-android-logger](https://github.com/PSDev/slf4j-android-logger) - [Apache License 2.0](https://github.com/PSDev/slf4j-android-logger/blob/master/LICENSE.txt)
 * [gson](https://github.com/google/gson) - [Apache License 2.0](https://github.com/google/gson/blob/master/LICENSE)
 * [Retrofit](https://github.com/square/retrofit) - [Apache License 2.0](https://github.com/square/retrofit/blob/master/LICENSE.txt)

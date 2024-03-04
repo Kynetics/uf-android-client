@@ -26,10 +26,6 @@ android {
         consumerProguardFiles "lib-proguard-rules.txt"
     }
 
-    dataBinding {
-        enabled = true
-    }
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
