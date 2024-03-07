@@ -37,7 +37,7 @@ object PackageInstallerBRHandler {
                 context,
                 requestCode,
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         return pendingIntent.intentSender
     }
 

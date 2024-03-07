@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), OnAuthorization {
                             R.string.update_started_content
                 ),
                 getString(android.R.string.ok),
-                getString(android.R.string.cancel)
+                getString(R.string.close)
         )
         newFragment.show(supportFragmentManager, "authorization")
     }
