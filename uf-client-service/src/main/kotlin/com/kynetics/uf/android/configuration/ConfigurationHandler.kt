@@ -28,7 +28,9 @@ import com.kynetics.uf.android.update.system.OtaUpdater
 import com.kynetics.uf.ddiclient.HaraClientFactory
 import com.kynetics.uf.ddiclient.TargetTokenFoundListener
 import org.eclipse.hara.ddiclient.api.*
+import org.jetbrains.annotations.TestOnly
 import java.io.File
+import java.net.URI
 import java.util.*
 
 data class ConfigurationHandler (
@@ -93,10 +95,12 @@ data class ConfigurationHandler (
 
     fun getCurrentConfiguration(): UFServiceConfigurationV2 {
         return with(sharedPreferences){
+            val url = getString(keys.sharedPreferencesServerUrlKey, "")!!
+            val newUrl = addDDISubdomainToTheUrl(url)
             UFServiceConfigurationV2(
                 tenant = getString(keys.sharedPreferencesTenantKey, "")!!,
                 controllerId = getString(keys.sharedPreferencesControllerIdKey, "")!!,
-                url = getString(keys.sharedPreferencesServerUrlKey, "")!!,
+                url = newUrl,
                 targetToken = getTargetToken(),
                 gatewayToken = getString(keys.sharedPreferencesGatewayToken, "")!!,
                 isApiMode = getBoolean(keys.sharedPreferencesApiModeKey, true),
@@ -175,7 +179,7 @@ data class ConfigurationHandler (
     ): HaraClient {
         return if(isUpdateFactoryServe){
             HaraClientFactory.newUFClient(
-                    toClientData(),
+                    toClientData().addDDISubdomainToTheUrl(),
                     object : DirectoryForArtifactsProvider {
                         override fun directoryForArtifacts(): File = currentUpdateState.rootDir()
                     },
@@ -228,5 +232,37 @@ data class ConfigurationHandler (
                     ALWAYS
                 )!!, getString(keys.sharedPreferencesTimeWindowsDuration, "$DEFAULT_WINDOW_DURATION")!!.toLong())
             }
+
+        private fun HaraClientData.addDDISubdomainToTheUrl(): HaraClientData {
+            val newUri = addDDISubdomainToTheUrl(serverUrl)
+            return HaraClientData(tenant, controllerId, newUri, gatewayToken, targetToken)
+        }
+
+        private fun addDDISubdomainToTheUrl(url: String): String {
+            if (url.isEmpty()) return url
+            runCatching {
+                val uri = URI.create(url)
+                val urlHost = uri.host
+                val regex = """^(stage|personal|business)\.((prod|test)\.)?updatefactory\.io${'$'}""".toRegex()
+
+                if (!urlHost.startsWith("ddi.") && regex.find(urlHost) != null) {
+                    val temp = urlHost.replace(regex, "ddi.\$0")
+                    URI(uri.scheme, uri.userInfo, temp,
+                        uri.port, uri.path, uri.query, uri.fragment).toString()
+                } else {
+                    url
+                }
+            }.onFailure {
+                Log.e(TAG, "Error adding DDI subdomain to the url", it)
+            }.onSuccess {
+                return it
+            }
+            return url
+        }
+
+        @TestOnly
+        internal fun testConfigurationUrlUpdate(configData: HaraClientData): HaraClientData {
+            return configData.addDDISubdomainToTheUrl()
+        }
     }
 }
