@@ -17,6 +17,7 @@ import android.content.SharedPreferences
 import android.os.Environment
 import android.os.SystemProperties
 import android.util.Log
+import com.kynetics.uf.android.BuildConfig
 import org.eclipse.hara.ddiclient.api.Updater
 import java.io.File
 import java.io.FileNotFoundException
@@ -144,8 +145,21 @@ class CurrentUpdateState(context: Context) {
         sharedPreferences.edit().putString(PENDING_AB_SHAREDPREFERENCES_KEY, artifact.hashes.md5).apply()
     }
 
-    fun isDeviceRebootedOnABInstallation(): Boolean {
+    fun addUFServiceVersionThatStartedTheUpdate() {
+        sharedPreferences.edit().putInt(UPDATE_STARTED_IN_VERSION, BuildConfig.VERSION_CODE).apply()
+    }
+
+    private fun isDeviceRebootedOnABInstallation(): Boolean {
         return sharedPreferences.getBoolean(PENDING_AB_REBOOT_SHAREDPREFERENCES_KEY, false)
+    }
+
+    fun isDeviceFailedToRebootOrUFServiceCrashed(): Boolean {
+        return isUpdateStartedInUFServiceVersion151orLater() &&
+                !isDeviceRebootedOnABInstallation()
+    }
+
+    private fun isUpdateStartedInUFServiceVersion151orLater(): Boolean {
+        return sharedPreferences.getInt(UPDATE_STARTED_IN_VERSION, 1) >= 35
     }
 
     @SuppressLint("ApplySharedPref")
@@ -203,6 +217,7 @@ class CurrentUpdateState(context: Context) {
                 .remove(PENDING_AB_SHAREDPREFERENCES_KEY)
                 .remove(UPDATE_IS_STARTED_KEY)
                 .remove(PENDING_AB_REBOOT_SHAREDPREFERENCES_KEY)
+                .remove(UPDATE_STARTED_IN_VERSION)
                 .apply()
     }
 
@@ -245,6 +260,7 @@ class CurrentUpdateState(context: Context) {
         private const val LAST_SLOT_NAME_SHAREDPREFERENCES_KEY = "slot_suffix"
         private const val PENDING_AB_SHAREDPREFERENCES_KEY = "PENDING_AB_OTA_KEY"
         private const val PENDING_AB_REBOOT_SHAREDPREFERENCES_KEY = "PENDING_AB_REBOOT_OTA_KEY"
+        private const val UPDATE_STARTED_IN_VERSION = "UPDATE_START_VERSION_KEY"
         private const val TAG = "CurrentUpdateState"
         private val SHARED_PREFERENCES_FILE_NAME = "CURRENT_UPDATE_STATE"
         private val APK_DISTRIBUTION_REPORT_SUCCESS_KEY = "APK_DISTRIBUTION_REPORT_SUCCESS"
