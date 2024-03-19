@@ -26,12 +26,8 @@ class UFSharedPreferences(
 
     init {
         runCatching {
-            Log.d(TAG, "Moving $secureKeys to encrypted sharedPreferences")
             moveSharedPreferences(sharedPreferencesWithObject, secureSharedPreferences) { entry -> secureKeys.contains(entry.key) }
-            Log.d(TAG, "$secureKeys successfully moved to encrypted sharedPreferences")
-            Log.d(TAG, "Moving other keys to plain sharedPreferences")
             moveSharedPreferences(secureSharedPreferences, sharedPreferencesWithObject) { entry -> !secureKeys.contains(entry.key) }
-            Log.d(TAG, "Keys successfully moved to plain sharedPreferences")
         }.onFailure {
             Log.w(TAG, "Error on moving shared preferences", it.cause)
         }.run {
