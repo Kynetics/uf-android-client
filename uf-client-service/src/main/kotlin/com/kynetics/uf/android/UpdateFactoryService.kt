@@ -21,12 +21,12 @@ import android.content.IntentFilter
 import android.os.*
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import com.kynetics.uf.android.apicomptibility.ApiVersion
 import com.kynetics.uf.android.client.RestartableClientService
 import com.kynetics.uf.android.communication.CommunicationApi
 import com.kynetics.uf.android.communication.CommunicationApiStrategy
 import com.kynetics.uf.android.communication.messenger.MessageHandler
-import com.kynetics.uf.android.communication.messenger.MessengerHandler
 import com.kynetics.uf.android.configuration.AndroidDeploymentPermitProvider
 import com.kynetics.uf.android.configuration.AndroidMessageListener
 import com.kynetics.uf.android.configuration.ConfigurationHandler
@@ -47,6 +47,8 @@ class UpdateFactoryService : Service(), UpdateFactoryServiceCommand {
 
     override fun authorizationGranted() {
         softDeploymentPermitProvider?.allow(true)
+        unregisterReceiver(authorizationGrantReceiver)
+        mNotificationManager?.cancel(AUTHORIZATION_GRANT_NOTIFICATION_ID)
     }
 
     override fun authorizationDenied() {
@@ -86,7 +88,6 @@ class UpdateFactoryService : Service(), UpdateFactoryServiceCommand {
         }
     }
 
-    private lateinit var forcePingPendingIntent: PendingIntent
     lateinit var currentUpdateState: CurrentUpdateState
 
     override fun onCreate() {
@@ -104,26 +105,6 @@ class UpdateFactoryService : Service(), UpdateFactoryServiceCommand {
         messageListener = AndroidMessageListener(this)
         currentUpdateState = CurrentUpdateState(this)
 
-        val forcePingIntent = Intent(FORCE_PING_ACTION)
-
-        forcePingPendingIntent = PendingIntent.getBroadcast(this, 1, forcePingIntent, 0)
-
-        // add actions here !
-        val intentFilter = IntentFilter()
-        intentFilter.addAction(FORCE_PING_ACTION)
-
-        val receiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                if (intent.action == FORCE_PING_ACTION) {
-                    ufService?.forcePing()
-                    MessengerHandler.onAction(MessageHandler.Action.FORCE_PING)
-                    val closeIntent = Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)
-                    sendBroadcast(closeIntent)
-                }
-            }
-        }
-
-        registerReceiver(receiver, intentFilter)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -174,18 +155,41 @@ class UpdateFactoryService : Service(), UpdateFactoryServiceCommand {
         }
     }
 
-    fun getNotification(notificationContent: String, forcePingAction: Boolean = false): Notification {
-
+    fun getNotification(notificationContent: String, grantPermissionAction: Boolean = false): Notification {
         val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.uf_logo)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(notificationContent))
                 .setContentTitle(getString(R.string.update_factory_notification_title))
                 .setContentText(notificationContent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        if (forcePingAction) {
-            notificationBuilder.addAction(android.R.drawable.ic_popup_sync, "Grant Authorization", forcePingPendingIntent)
+        if (grantPermissionAction) {
+            notificationBuilder.addPermissionGrantActionToNotification()
         }
         return notificationBuilder.build()
+    }
+
+    private fun NotificationCompat.Builder.addPermissionGrantActionToNotification() {
+        ContextCompat.registerReceiver(this@UpdateFactoryService, authorizationGrantReceiver,
+            IntentFilter(AUTHORIZATION_GRANTED_ACTION), ContextCompat.RECEIVER_NOT_EXPORTED)
+
+        val intent = Intent(AUTHORIZATION_GRANTED_ACTION)
+            .setPackage(BuildConfig.APPLICATION_ID)
+
+        val actionPendingIntent = PendingIntent.getBroadcast(this@UpdateFactoryService,
+            1, intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+
+        addAction(R.drawable.ic_action_check,
+            "Grant Authorization", actionPendingIntent)
+        setOngoing(true)
+    }
+
+    private val authorizationGrantReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.action == AUTHORIZATION_GRANTED_ACTION) {
+                authorizationGranted()
+            }
+        }
     }
 
     companion object {
@@ -224,9 +228,10 @@ class UpdateFactoryService : Service(), UpdateFactoryServiceCommand {
 
         @JvmStatic
         var ufServiceCommand: UpdateFactoryServiceCommand? = null
-        private const val FORCE_PING_ACTION = "ForcePing"
         private const val CHANNEL_ID = "UPDATE_FACTORY_NOTIFICATION_CHANNEL_ID"
+        private const val AUTHORIZATION_GRANTED_ACTION = "com.kynetics.action.AUTHORIZATION_GRANTED"
         const val NOTIFICATION_ID = 1
+        const val AUTHORIZATION_GRANT_NOTIFICATION_ID = 2
         private val TAG = UpdateFactoryService::class.java.simpleName
     }
 }

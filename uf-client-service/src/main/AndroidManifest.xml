@@ -15,6 +15,7 @@
     <uses-sdk tools:overrideLibrary="androidx.security"/>
 
     <uses-permission android:name="com.kynetics.action.INSTALL_COMPLETED" />
+    <uses-permission android:name="com.kynetics.action.AUTHORIZATION_GRANTED" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

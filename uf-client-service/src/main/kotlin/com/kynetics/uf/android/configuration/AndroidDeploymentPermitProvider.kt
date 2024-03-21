@@ -39,14 +39,14 @@ interface AndroidDeploymentPermitProvider : DeploymentPermitProvider {
                         MessengerHandler.sendBroadcastMessage(Communication.V1.Out.AuthorizationRequest.ID, auth.name)
                     } else {
                         showAuthorizationDialog(auth)
+                        mNotificationManager.notify(UpdateFactoryService.AUTHORIZATION_GRANT_NOTIFICATION_ID,
+                            service.getNotification(auth.event, true))
                     }
 
                     authResponse.complete(false)
                     authResponse = CompletableDeferred()
                     authResponse.invokeOnCompletion {
                         if (authResponse.getCompleted()) {
-                            mNotificationManager.notify(UpdateFactoryService.NOTIFICATION_ID,
-                                service.getNotification(auth.event.toString(), true))
                             MessengerHandler.onAction(auth.toActionOnGranted)
                         } else {
                             MessengerHandler.onAction(auth.toActionOnDenied)
@@ -57,7 +57,8 @@ interface AndroidDeploymentPermitProvider : DeploymentPermitProvider {
                 }
 
                 override fun allow(isAllowed: Boolean) {
-                    authResponse.complete(isAllowed)
+                    if (isAllowed)
+                        authResponse.complete(true)
                 }
 
                 override fun downloadAllowed(): Deferred<Boolean> {

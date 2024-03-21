@@ -20,6 +20,7 @@
     <string name="update_started_content">The upgrade is ready, click OK to upgrade now.\nThe device will be restarted during the upgrade process.</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="close">Close</string>
 
 
 
