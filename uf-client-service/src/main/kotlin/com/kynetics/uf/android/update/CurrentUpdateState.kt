@@ -178,6 +178,10 @@ class CurrentUpdateState(context: Context) {
         data class Error(override val details: List<String> = emptyList()) : InstallationResult()
     }
 
+    /**
+     * Verify whether the installation of the package is managed and completed beforehand
+     * to prevent multiple installations.
+     * */
     fun isPackageInstallationTerminated(packageName: String?, versionCode: Long?): Boolean {
         val key = String.format(APK_PACKAGE_TEMPLATE_KEY, getPackageKey(packageName))
         val version = getVersion(versionCode)
@@ -192,11 +196,15 @@ class CurrentUpdateState(context: Context) {
         return versionCode ?: 0
     }
 
+    /**
+     * Marks the installation of the package with the specified [packageName] as
+     * managed and completed to prevent multiple installations.
+     */
     fun packageInstallationTerminated(packageName: String?, versionCode: Long?) {
         val key = String.format(APK_PACKAGE_TEMPLATE_KEY, getPackageKey(packageName))
         sharedPreferences.edit()
-                .putLong(key, getVersion(versionCode))
-                .apply()
+            .putLong(key, getVersion(versionCode))
+            .apply()
     }
 
     fun clearState() {

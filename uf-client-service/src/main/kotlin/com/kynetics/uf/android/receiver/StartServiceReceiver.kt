@@ -27,11 +27,17 @@ class StartServiceReceiver : BroadcastReceiver() {
         val action = intent.action
         val ufServiceIsUpdated = Intent.ACTION_MY_PACKAGE_REPLACED == action
         if (ufServiceIsUpdated) {
-            Log.d(TAG, "Uf service is updated")
-            CurrentUpdateState(context).packageInstallationTerminated(
-                BuildConfig.APPLICATION_ID,
-                BuildConfig.VERSION_CODE.toLong()
-            )
+            val message = String.format("UF-Service is updated to version %s (%d)",
+                BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
+            Log.d(TAG, message)
+            val currentUpdateState = CurrentUpdateState(context)
+            if (currentUpdateState.isUpdateStart()) {
+                currentUpdateState.addSuccessMessageToReport(message)
+                currentUpdateState.packageInstallationTerminated(
+                    BuildConfig.APPLICATION_ID,
+                    BuildConfig.VERSION_CODE.toLong()
+                )
+            }
         }
         if (ufServiceIsUpdated || Intent.ACTION_BOOT_COMPLETED == action) {
             UpdateFactoryService.startService(context)
