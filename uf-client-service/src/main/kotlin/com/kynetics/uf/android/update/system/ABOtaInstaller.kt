@@ -123,9 +123,10 @@ internal object ABOtaInstaller : OtaInstaller {
         val abInstallationPending = currentUpdateState.isABInstallationPending(artifact)
         val isDeviceFailedToRebootOrUFServiceCrashed =
             currentUpdateState.isDeviceFailedToRebootOrUFServiceCrashed()
-
+        val deviceRebootedWhileUpdating = currentUpdateState.isDeviceRebootedAfterUpdateStarted()
         return when {
-            abInstallationPending && isDeviceFailedToRebootOrUFServiceCrashed -> {
+            abInstallationPending && !deviceRebootedWhileUpdating &&
+                    isDeviceFailedToRebootOrUFServiceCrashed -> {
                 updateEngine.bind(
                     MyUpdateEngineCallback(
                         context,
@@ -135,7 +136,7 @@ internal object ABOtaInstaller : OtaInstaller {
                 )
                 installationResult(updateStatus, messenger, artifact)
             }
-            abInstallationPending -> {
+            abInstallationPending && !isDeviceFailedToRebootOrUFServiceCrashed -> {
                 val result = currentUpdateState.lastABInstallationResult()
                 val message = "Installation result of Ota named ${artifact.filename} is " +
                         if (result is CurrentUpdateState.InstallationResult.Success) "success" else "failure"
@@ -169,6 +170,7 @@ internal object ABOtaInstaller : OtaInstaller {
                         updateStatus, currentUpdateState
                     )
                 )
+                currentUpdateState.storeDeviceBootDate()
                 currentUpdateState.addPendingABInstallation(artifact)
                 currentUpdateState.addUFServiceVersionThatStartedTheUpdate()
                 messenger.sendMessageToServer(

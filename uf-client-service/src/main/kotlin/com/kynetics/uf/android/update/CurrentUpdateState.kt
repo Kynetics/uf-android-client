@@ -15,6 +15,7 @@ import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Environment
+import android.os.SystemClock
 import android.os.SystemProperties
 import android.util.Log
 import com.kynetics.uf.android.BuildConfig
@@ -218,6 +219,7 @@ class CurrentUpdateState(context: Context) {
                 .remove(UPDATE_IS_STARTED_KEY)
                 .remove(PENDING_AB_REBOOT_SHAREDPREFERENCES_KEY)
                 .remove(UPDATE_STARTED_IN_VERSION)
+                .remove(DEVICE_BOOT_DATE_WHEN_UPDATE_STARTED_KEY)
                 .apply()
     }
 
@@ -244,6 +246,36 @@ class CurrentUpdateState(context: Context) {
         }
     }
 
+    /**
+     * Returns the date-time that the device was booted in seconds.
+     *
+     * Note: This function should not be called when device is booting up.
+     * Because the current time is not reliable until the device is fully booted and connected to the network.
+     * @return the boot time in seconds since epoch.
+     * */
+    private fun getBootDateInSeconds(): Long {
+        return (System.currentTimeMillis() - SystemClock.elapsedRealtime()) / 1000
+    }
+
+    fun storeDeviceBootDate() {
+        sharedPreferences.edit()
+            .putLong(DEVICE_BOOT_DATE_WHEN_UPDATE_STARTED_KEY, getBootDateInSeconds())
+            .apply()
+    }
+
+    private fun getDeviceBootDateStoredInPreferences(): Long {
+        return sharedPreferences.getLong(DEVICE_BOOT_DATE_WHEN_UPDATE_STARTED_KEY, 0)
+    }
+
+    fun isDeviceRebootedAfterUpdateStarted(): Boolean {
+        val currentBootDate = getBootDateInSeconds() / 10
+        val previousBootDate = getDeviceBootDateStoredInPreferences() / 10
+        if (previousBootDate == 0L) {
+            return false
+        }
+        return currentBootDate != previousBootDate
+    }
+
     fun parseLastLogFile(): List<String> {
         return try {
             val lastLogFile = File(RECOVERY_CACHE, LAST_LOG_FILE_NAME)
@@ -261,6 +293,7 @@ class CurrentUpdateState(context: Context) {
         private const val PENDING_AB_SHAREDPREFERENCES_KEY = "PENDING_AB_OTA_KEY"
         private const val PENDING_AB_REBOOT_SHAREDPREFERENCES_KEY = "PENDING_AB_REBOOT_OTA_KEY"
         private const val UPDATE_STARTED_IN_VERSION = "UPDATE_START_VERSION_KEY"
+        private const val DEVICE_BOOT_DATE_WHEN_UPDATE_STARTED_KEY = "DEVICE_BOOT_DATE_WHEN_UPDATE_STARTED"
         private const val TAG = "CurrentUpdateState"
         private val SHARED_PREFERENCES_FILE_NAME = "CURRENT_UPDATE_STATE"
         private val APK_DISTRIBUTION_REPORT_SUCCESS_KEY = "APK_DISTRIBUTION_REPORT_SUCCESS"
