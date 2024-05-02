@@ -14,9 +14,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Environment
 import android.os.SystemProperties
+import android.provider.Settings.Global
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.kynetics.uf.android.BuildConfig
 import org.eclipse.hara.ddiclient.api.Updater
 import java.io.File
@@ -226,6 +229,7 @@ class CurrentUpdateState(context: Context) {
                 .remove(UPDATE_IS_STARTED_KEY)
                 .remove(PENDING_AB_REBOOT_SHAREDPREFERENCES_KEY)
                 .remove(UPDATE_STARTED_IN_VERSION)
+                .remove(DEVICE_BOOT_COUNT_WHEN_UPDATE_STARTED_KEY)
                 .apply()
     }
 
@@ -252,6 +256,55 @@ class CurrentUpdateState(context: Context) {
         }
     }
 
+    /**
+     * Retrieve device boot count from the system settings.
+     *
+     * @return the boot count if available, otherwise null.
+     * */
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun getBootCount(context: Context): Int? {
+        return try {
+            Global.getInt(context.contentResolver, Global.BOOT_COUNT)
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to get the boot count", e)
+            null
+        }
+    }
+
+    /**
+     * Store the device boot count on the shared preferences only if the boot count is available.
+     * Note: This method is only available for Android N and later.
+     * */
+    fun storeDeviceBootCount(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val bootCount = getBootCount(context)
+            bootCount?.let {
+                sharedPreferences.edit()
+                    .putInt(DEVICE_BOOT_COUNT_WHEN_UPDATE_STARTED_KEY, it)
+                    .apply()
+            }
+        }
+    }
+
+    /**
+     * Retrieve the device boot count stored in the shared preferences.
+     *
+     * @return the boot count if available, otherwise [DEFAULT_BOOT_COUNT].
+     * */
+    private fun getDeviceBootCountStoredInPreferences(): Int {
+        return sharedPreferences.getInt(DEVICE_BOOT_COUNT_WHEN_UPDATE_STARTED_KEY, DEFAULT_BOOT_COUNT)
+    }
+
+    fun isDeviceRebootedAfterUpdateStarted(context: Context): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            val currentBootCount = getBootCount(context)
+            val previousBootCount = getDeviceBootCountStoredInPreferences()
+            currentBootCount != previousBootCount
+        } else {
+            false
+        }
+    }
+
     fun parseLastLogFile(): List<String> {
         return try {
             val lastLogFile = File(RECOVERY_CACHE, LAST_LOG_FILE_NAME)
@@ -269,6 +322,7 @@ class CurrentUpdateState(context: Context) {
         private const val PENDING_AB_SHAREDPREFERENCES_KEY = "PENDING_AB_OTA_KEY"
         private const val PENDING_AB_REBOOT_SHAREDPREFERENCES_KEY = "PENDING_AB_REBOOT_OTA_KEY"
         private const val UPDATE_STARTED_IN_VERSION = "UPDATE_START_VERSION_KEY"
+        private const val DEVICE_BOOT_COUNT_WHEN_UPDATE_STARTED_KEY = "DEVICE_BOOT_COUNT_WHEN_UPDATE_STARTED"
         private const val TAG = "CurrentUpdateState"
         private val SHARED_PREFERENCES_FILE_NAME = "CURRENT_UPDATE_STATE"
         private val APK_DISTRIBUTION_REPORT_SUCCESS_KEY = "APK_DISTRIBUTION_REPORT_SUCCESS"
@@ -280,6 +334,7 @@ class CurrentUpdateState(context: Context) {
         private const val ALL_FILE_DOWNLOADED_START_KEY = "ALL_FILE_DOWNLOADED_"
         private const val ALL_FILE_DOWNLOADED_TEMPLAE = "$ALL_FILE_DOWNLOADED_START_KEY%s"
         private const val CURRENT_UPDATE_ID_KEY = "CURRENT_UPDATE_ID"
+        private const val DEFAULT_BOOT_COUNT = -1
         private val CACHE = File("cache")
         private val CACHE_UF = File(CACHE, "update_factory")
         private val RECOVERY_CACHE = File(CACHE, "recovery")
