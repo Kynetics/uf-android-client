@@ -71,18 +71,6 @@
         android:key="@string/shared_preferences_api_mode_key"
         android:title="@string/shared_preferences_api_mode_title" />
 
-    <Preference
-        android:inputType="textCapWords"
-        android:key="@string/shared_preferences_current_state_key"
-        android:title="@string/shared_preferences_current_state_title"
-        android:maxLines="1"
-        android:selectAllOnFocus="true"
-        android:singleLine="true" />
-
-    <Preference
-        android:key="@string/shared_preferences_system_update_type_key"
-        android:title="@string/shared_preferences_system_update_type_title" />
-
     <PreferenceCategory
         android:title="@string/force_update_label">
         <com.kynetics.uf.android.ui.preferences.EditTextValidateSchedulePreference
@@ -96,6 +84,27 @@
             android:title="@string/time_windows_size_label"
             android:inputType="number"
             android:key="@string/shared_preferences_time_windows_duration_key" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preferences_about_label">
+
+        <Preference
+            android:inputType="textCapWords"
+            android:key="@string/shared_preferences_current_state_key"
+            android:title="@string/shared_preferences_current_state_title"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true" />
+
+        <Preference
+            android:key="@string/shared_preferences_system_update_type_key"
+            android:title="@string/shared_preferences_system_update_type_title" />
+
+        <Preference
+            android:key="@string/shared_preferences_service_versions_key"
+            android:title="@string/shared_preferences_service_versions_title" />
+
     </PreferenceCategory>
 
 

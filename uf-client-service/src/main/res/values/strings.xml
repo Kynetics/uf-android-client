@@ -61,7 +61,10 @@
     <string name="shared_preferences_time_windows_cron_expression_key">TIME_WINDOWS_CRON_EXPRESSION</string>
     <string name="shared_preferences_schedule_update_title">Schedule Update</string>
     <string name="shared_preferences_time_windows_duration_key">TIME_WINDOWS_DURATION</string>
+    <string name="shared_preferences_service_versions_title">UF Service Version (VersionCode)</string>
+    <string name="shared_preferences_service_versions_key">UF_SERVICE_VERSION</string>
     <string name="force_update_label">Force update</string>
+    <string name="preferences_about_label">UF Service Information</string>
     <string name="time_windows_size_label">Time windows duration in seconds</string>
 
 </resources>

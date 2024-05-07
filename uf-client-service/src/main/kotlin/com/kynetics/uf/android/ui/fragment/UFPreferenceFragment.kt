@@ -19,6 +19,7 @@ import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.*
 import com.cronutils.descriptor.CronDescriptor
+import com.kynetics.uf.android.BuildConfig
 import com.kynetics.uf.android.R
 import com.kynetics.uf.android.UpdateFactoryService
 import com.kynetics.uf.android.api.ApiCommunicationVersion
@@ -156,6 +157,11 @@ class UFPreferenceFragment : PreferenceFragmentCompat(), SharedPreferences.OnSha
 
         if (key == getString(R.string.shared_preferences_system_update_type_key)) {
             preference.summary = sharedPrefs.getString(getString(R.string.shared_preferences_system_update_type_key), "")
+            return
+        }
+
+        if (key == getString(R.string.shared_preferences_service_versions_key)) {
+            preference.summary = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
             return
         }
 
