@@ -99,6 +99,7 @@ class TargetAttributesHandlerImpl(
         targetAttributes[ANDROID_FINGERPRINT_TARGET_ATTRIBUTE_KEY] = Build.FINGERPRINT
         targetAttributes[ANDROID_KEYS_TARGET_ATTRIBUTE_KEY] = Build.TAGS
         targetAttributes[ANDROID_VERSION_TARGET_ATTRIBUTE_KEY] = Build.VERSION.RELEASE
+        targetAttributes[ANDROID_API_LEVEL_TARGET_ATTRIBUTE_KEY] = Build.VERSION.SDK_INT.toString()
         targetAttributes[DEVICE_NAME_TARGET_ATTRIBUTE_KEY] = Build.DEVICE
         targetAttributes[SYSTEM_UPDATE_TYPE] = systemUpdateType.name
         targetAttributes[DEVICE_TIME_ZONE_TARGET_ATTRIBUTE_KEY] = TimeZone.getDefault().id
@@ -126,6 +127,7 @@ class TargetAttributesHandlerImpl(
         private const val ANDROID_FINGERPRINT_TARGET_ATTRIBUTE_KEY = "android_fingerprint"
         private const val ANDROID_KEYS_TARGET_ATTRIBUTE_KEY = "android_keys"
         private const val ANDROID_VERSION_TARGET_ATTRIBUTE_KEY = "android_version"
+        private const val ANDROID_API_LEVEL_TARGET_ATTRIBUTE_KEY = "android_api_level"
         private const val DEVICE_NAME_TARGET_ATTRIBUTE_KEY = "device_name"
         private const val SYSTEM_UPDATE_TYPE = "system_update_type"
         private const val DEVICE_UTC_TARGET_ATTRIBUTE_KEY = "utc_offset"
