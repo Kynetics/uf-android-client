@@ -253,6 +253,7 @@ internal object ABOtaInstaller : OtaInstaller {
 
         companion object {
             private const val MAX_MESSAGES_PER_PHASE = 10
+            private const val UPDATE_ENGINE_STATUS_CLEAN_UP = 11
         }
 
         private var previousState = Int.MAX_VALUE
@@ -265,6 +266,10 @@ internal object ABOtaInstaller : OtaInstaller {
             val newPhase = previousState != status
             if (newPhase) {
                 previousState = status
+                if (status == UPDATE_ENGINE_STATUS_CLEAN_UP) {
+                    Log.d(TAG, "Android Update Engine: Clean up previous update")
+                    return
+                }
                 messenger.sendMessageToServer(UPDATE_STATUS.getValue(status))
                 queue.clear()
                 queue.addAll(
