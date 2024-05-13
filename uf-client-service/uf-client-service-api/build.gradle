@@ -16,6 +16,8 @@ group='com.kynetics.uf.android.api'
 
 version versionFromGit(project)
 
+def ufApiVersionName = "1.2.1"
+
 android {
     compileSdk 31
     defaultConfig {
@@ -24,6 +26,7 @@ android {
         targetSdkVersion 30
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "lib-proguard-rules.txt"
+        versionName ufApiVersionName
     }
 
     sourceSets {
@@ -34,6 +37,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    libraryVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = new File("uf-client-service-api_${variant.buildType.name}_${ufApiVersionName}.aar")
+        }
+    }
+
 }
 
 dependencies {
