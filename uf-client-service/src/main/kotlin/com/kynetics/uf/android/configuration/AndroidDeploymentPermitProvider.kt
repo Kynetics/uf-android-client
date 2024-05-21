@@ -35,14 +35,6 @@ interface AndroidDeploymentPermitProvider : DeploymentPermitProvider {
                 private var authResponse = CompletableDeferred<Boolean>()
 
                 private fun allowedAsync(auth: UpdateFactoryService.Companion.AuthorizationType): Deferred<Boolean> {
-                    if (configurationHandler.apiModeIsEnabled()) {
-                        MessengerHandler.sendBroadcastMessage(Communication.V1.Out.AuthorizationRequest.ID, auth.name)
-                    } else {
-                        showAuthorizationDialog(auth)
-                        mNotificationManager.notify(UpdateFactoryService.AUTHORIZATION_GRANT_NOTIFICATION_ID,
-                            service.getNotification(auth.event, true))
-                    }
-
                     authResponse.complete(false)
                     authResponse = CompletableDeferred()
                     authResponse.invokeOnCompletion {
@@ -51,6 +43,17 @@ interface AndroidDeploymentPermitProvider : DeploymentPermitProvider {
                         } else {
                             MessengerHandler.onAction(auth.toActionOnDenied)
                         }
+                    }
+
+                    if (configurationHandler.apiModeIsEnabled()) {
+                        MessengerHandler.sendBroadcastMessage(
+                            Communication.V1.Out.AuthorizationRequest.ID,
+                            auth.name)
+                    } else {
+                        showAuthorizationDialog(auth)
+                        mNotificationManager.notify(
+                            UpdateFactoryService.AUTHORIZATION_GRANT_NOTIFICATION_ID,
+                            service.getNotification(auth.event, true))
                     }
 
                     return authResponse
