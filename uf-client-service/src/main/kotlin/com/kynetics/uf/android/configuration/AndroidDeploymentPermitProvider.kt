@@ -12,6 +12,7 @@ package com.kynetics.uf.android.configuration
 
 import android.app.NotificationManager
 import android.content.Intent
+import android.util.Log
 import com.kynetics.uf.android.UpdateFactoryService
 import com.kynetics.uf.android.api.Communication
 import com.kynetics.uf.android.communication.messenger.MessengerHandler
@@ -25,6 +26,7 @@ interface AndroidDeploymentPermitProvider : DeploymentPermitProvider {
     fun allow(isAllowed: Boolean)
 
     companion object {
+        val TAG = AndroidDeploymentPermitProvider::class.java.simpleName
         fun build(
             configurationHandler: ConfigurationHandler,
             mNotificationManager: NotificationManager,
@@ -60,8 +62,10 @@ interface AndroidDeploymentPermitProvider : DeploymentPermitProvider {
                 }
 
                 override fun allow(isAllowed: Boolean) {
-                    if (isAllowed)
+                    if (isAllowed) {
                         authResponse.complete(true)
+                        Log.i(TAG, "Authorization granted")
+                    }
                 }
 
                 override fun downloadAllowed(): Deferred<Boolean> {

@@ -39,12 +39,12 @@ abstract class AbstractCommunicationApi(
     }
 
     override fun subscribeClient(messenger: Messenger?, apiVersion: ApiCommunicationVersion) {
-        Log.i(tag, "receive subscription request")
+        Log.i(tag, "received subscription request")
         MessengerHandler.subscribeClient(messenger, apiVersion)
     }
 
     override fun unsubscribeClient(messenger: Messenger?) {
-        Log.i(tag, "receive un-subscription request")
+        Log.i(tag, "received un-subscription request")
         MessengerHandler.unsubscribeClient(messenger)
     }
 
@@ -73,7 +73,7 @@ abstract class AbstractCommunicationApi(
     }
 
     override fun forcePing() {
-        Log.i(tag, "receive request to resume suspend state")
+        Log.i(tag, "received force ping request")
         ufService.forcePing()
     }
 
@@ -97,15 +97,15 @@ abstract class AbstractCommunicationApi(
     }
 
     override fun authorizationResponse(msg: Message) {
-        Log.i(tag, "receive authorization response")
         if(!msg.data.containsKey(Communication.V1.SERVICE_DATA_KEY)){
             Log.i(tag, "Invalid authorization response message received")
             return
         }
         val response = msg.data.getBoolean(Communication.V1.SERVICE_DATA_KEY)
-        softDeploymentPermitProvider.allow(response)
+        val authorizationMsgLog = String.format("received authorization %s response", if (response) "granted" else "denied")
+        Log.i(tag, authorizationMsgLog)
 
-        Log.i(tag, String.format("authorization %s", if (response) "granted" else "denied"))
+        softDeploymentPermitProvider.allow(response)
     }
 
     override fun onMessage(msg: Message) {
@@ -122,12 +122,12 @@ abstract class AbstractCommunicationApi(
 
             Communication.V1.In.Sync.ID -> sync(msg.replyTo)
 
-            else -> Log.i(tag, "Invalid message receive (what == ${msg.what})")
+            else -> Log.i(tag, "Invalid message received (what == ${msg.what})")
         }
     }
 
     private fun configureService(msg: Message) {
-        Log.i(tag, "receive configuration update request")
+        Log.i(tag, "received configuration update request")
         val configuration =  try{
             if(!msg.data.containsKey(Communication.V1.SERVICE_DATA_KEY)){
                 Log.i(tag, "Invalid configuration message received (no configuration found)")

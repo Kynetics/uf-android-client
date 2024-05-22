@@ -96,6 +96,7 @@ class UpdateFactoryService : Service(), UpdateFactoryServiceCommand {
         if(BuildConfig.DEBUG){
             AndroidLoggerAdapter.setLogLevel(LogLevel.TRACE)
         }
+        Log.i(TAG, "Creating UF Service")
         mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         sharedPreferencesFile = getString(R.string.shared_preferences_file)
         configurationHandler = ConfigurationHandler( this, getSharedPreferences(sharedPreferencesFile, Context.MODE_PRIVATE))
@@ -104,11 +105,10 @@ class UpdateFactoryService : Service(), UpdateFactoryServiceCommand {
         softDeploymentPermitProvider = AndroidDeploymentPermitProvider.build(configurationHandler!!, mNotificationManager!!, this)
         messageListener = AndroidMessageListener(this)
         currentUpdateState = CurrentUpdateState(this)
-
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.i(TAG, String.format("service's starting with version %s (%s)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE))
+        Log.i(TAG, String.format("service is starting with version %s (%s)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE))
         startForeground()
         isRunning = true
         var serviceConfiguration = configurationHandler?.getConfigurationFromFile()

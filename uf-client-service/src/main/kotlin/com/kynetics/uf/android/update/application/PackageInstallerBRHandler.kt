@@ -46,7 +46,7 @@ object PackageInstallerBRHandler {
             try {
                 context.unregisterReceiver(currentReceiver)
             } catch (e:Exception){
-                Log.i(TAG, "Can't unregister receiver", e)
+                Log.d(TAG, "Can't unregister receiver: ${e.message}")
             }
         }
     }

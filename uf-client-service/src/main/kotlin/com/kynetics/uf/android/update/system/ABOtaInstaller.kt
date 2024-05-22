@@ -127,6 +127,7 @@ internal object ABOtaInstaller : OtaInstaller {
         return when {
             abInstallationPending && !deviceRebootedWhileUpdating &&
                     isDeviceFailedToRebootOrUFServiceCrashed -> {
+                Log.d(TAG, "Ongoing AB ota installation, attaching callback to update engine")
                 updateEngine.bind(
                     MyUpdateEngineCallback(
                         context,
@@ -145,7 +146,7 @@ internal object ABOtaInstaller : OtaInstaller {
                 result
             }
             isOtaMalformed(artifact) -> {
-                Log.d(TAG, "Malformed AB ota")
+                Log.i(TAG, "Malformed AB ota")
                 CurrentUpdateState.InstallationResult.Error(
                     listOf(
                         "Malformed ota for AB update.",
