@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>UFServiceConfigurationV2</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script></head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+<a href="../../../../index.html">
+<span>uf-android-client</span>            </a>    </div>
+    <div>
+    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageids="uf-client-service-api::com.kynetics.uf.android.api/UFServiceConfigurationV2///PointingToDeclaration//1079347412">
+  <div class="breadcrumbs"><a href="../../index.html">uf-client-service-api</a><span class="delimiter">/</span><a href="../index.html">com.kynetics.uf.android.api</a><span class="delimiter">/</span><a href="index.html">UFServiceConfigurationV2</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span>UFService</span><wbr><span>Configuration</span><wbr><span><span>V2</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">UFServiceConfigurationV2</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>tenant<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>controllerId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>url<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>targetToken<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>gatewayToken<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>isApiMode<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>isEnable<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>isUpdateFactoryServe<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>targetAttributes<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyMap()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>timeWindows<span class="token operator">: </span><a href="-time-windows/index.html">UFServiceConfigurationV2.TimeWindows</a><span class="token operator"> = </span>TimeWindows()</span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">This class represent the com.kynetics.uf.android.UpdateFactoryService configuration</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Types">Types</button><button class="section-tab" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Functions">Functions</button><button class="section-tab" data-togglable="Properties">Properties</button></div>
+    <div class="tabs-section-body">
+      <h2 class="tabbedcontent">Constructors</h2>
+      <div class="table" data-togglable="Constructors"><a data-name="-1904559861%2FConstructors%2F1079347412" anchor-label="UFServiceConfigurationV2" id="-1904559861%2FConstructors%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-u-f-service-configuration-v2.html"><span>UFService</span><wbr><span>Configuration</span><wbr><span><span>V2</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1904559861%2FConstructors%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-u-f-service-configuration-v2.html"><span class="token function">UFServiceConfigurationV2</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;tenant<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;controllerId<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;url<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;targetToken<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;gatewayToken<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;isApiMode<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;isEnable<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;isUpdateFactoryServe<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;targetAttributes<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator"> = </span>emptyMap()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;timeWindows<span class="token operator">: </span><a href="-time-windows/index.html">UFServiceConfigurationV2.TimeWindows</a><span class="token operator"> = </span>TimeWindows()</span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Types</h2>
+      <div class="table" data-togglable="Types"><a data-name="-365304437%2FClasslikes%2F1079347412" anchor-label="Companion" id="-365304437%2FClasslikes%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-365304437%2FClasslikes%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-401675423%2FClasslikes%2F1079347412" anchor-label="TimeWindows" id="-401675423%2FClasslikes%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="-time-windows/index.html"><span>Time</span><wbr><span><span>Windows</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-401675423%2FClasslikes%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="-time-windows/index.html">TimeWindows</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>cronExpression<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span>ALWAYS<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>duration<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token operator"> = </span>DEFAULT_WINDOW_DURATION</span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Class to configure the time windows behaviour. It defines when a forced update can be applied based on a schedule defined as cron expression (QUARTZ) and a duration in seconds.</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Functions</h2>
+      <div class="table" data-togglable="Functions"><a data-name="-1693984781%2FFunctions%2F1079347412" anchor-label="toJson" id="-1693984781%2FFunctions%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="to-json.html"><span>to</span><wbr><span><span>Json</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1693984781%2FFunctions%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="to-json.html"><span class="token function">toJson</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><p class="paragraph">Json serialization</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="7867359%2FProperties%2F1079347412" anchor-label="controllerId" id="7867359%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="controller-id.html"><span>controller</span><wbr><span><span>Id</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="7867359%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="7867359%2FProperties%2F1079347412" anchor-label="controllerId" id="7867359%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="controller-id.html">controllerId</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="7867359%2FProperties%2F1079347412" anchor-label="controllerId" id="7867359%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">Id of the controller</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="684873057%2FProperties%2F1079347412" anchor-label="gatewayToken" id="684873057%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="gateway-token.html"><span>gateway</span><wbr><span><span>Token</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="684873057%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="684873057%2FProperties%2F1079347412" anchor-label="gatewayToken" id="684873057%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="gateway-token.html">gatewayToken</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="684873057%2FProperties%2F1079347412" anchor-label="gatewayToken" id="684873057%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">Gateway token</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-223709871%2FProperties%2F1079347412" anchor-label="isApiMode" id="-223709871%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="is-api-mode.html"><span>is</span><wbr><span>Api</span><wbr><span><span>Mode</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-223709871%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="-223709871%2FProperties%2F1079347412" anchor-label="isApiMode" id="-223709871%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-api-mode.html">isApiMode</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-223709871%2FProperties%2F1079347412" anchor-label="isApiMode" id="-223709871%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">true to handle authorization via service messages, false to use service built-in dialog</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1188933719%2FProperties%2F1079347412" anchor-label="isEnable" id="-1188933719%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="is-enable.html"><span>is</span><wbr><span><span>Enable</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1188933719%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="-1188933719%2FProperties%2F1079347412" anchor-label="isEnable" id="-1188933719%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-enable.html">isEnable</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1188933719%2FProperties%2F1079347412" anchor-label="isEnable" id="-1188933719%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">true to enable the service, false otherwise</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1572723070%2FProperties%2F1079347412" anchor-label="isUpdateFactoryServe" id="1572723070%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="is-update-factory-serve.html"><span>is</span><wbr><span>Update</span><wbr><span>Factory</span><wbr><span><span>Serve</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1572723070%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="1572723070%2FProperties%2F1079347412" anchor-label="isUpdateFactoryServe" id="1572723070%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-update-factory-serve.html">isUpdateFactoryServe</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1572723070%2FProperties%2F1079347412" anchor-label="isUpdateFactoryServe" id="1572723070%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">true when the server is Update Factory, false when the server is hawkBit</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1332453038%2FProperties%2F1079347412" anchor-label="isValid" id="-1332453038%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="is-valid.html"><span>is</span><wbr><span><span>Valid</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1332453038%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="-1332453038%2FProperties%2F1079347412" anchor-label="isValid" id="-1332453038%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="is-valid.html">isValid</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1332453038%2FProperties%2F1079347412" anchor-label="isValid" id="-1332453038%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">True if the configuration is valid</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-2026145650%2FProperties%2F1079347412" anchor-label="targetAttributes" id="-2026145650%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="target-attributes.html"><span>target</span><wbr><span><span>Attributes</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2026145650%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="-2026145650%2FProperties%2F1079347412" anchor-label="targetAttributes" id="-2026145650%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="target-attributes.html">targetAttributes</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/index.html">Map</a><span class="token operator">&lt;</span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-2026145650%2FProperties%2F1079347412" anchor-label="targetAttributes" id="-2026145650%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">target metadata sent to the server</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-479790948%2FProperties%2F1079347412" anchor-label="targetToken" id="-479790948%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="target-token.html"><span>target</span><wbr><span><span>Token</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-479790948%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="-479790948%2FProperties%2F1079347412" anchor-label="targetToken" id="-479790948%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="target-token.html">targetToken</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-479790948%2FProperties%2F1079347412" anchor-label="targetToken" id="-479790948%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">Target token</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="1184473900%2FProperties%2F1079347412" anchor-label="tenant" id="1184473900%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="tenant.html"><span><span>tenant</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1184473900%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="1184473900%2FProperties%2F1079347412" anchor-label="tenant" id="1184473900%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="tenant.html">tenant</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="1184473900%2FProperties%2F1079347412" anchor-label="tenant" id="1184473900%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">The tenant</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1282729906%2FProperties%2F1079347412" anchor-label="timeWindows" id="-1282729906%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="time-windows.html"><span>time</span><wbr><span><span>Windows</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1282729906%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="-1282729906%2FProperties%2F1079347412" anchor-label="timeWindows" id="-1282729906%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="time-windows.html">timeWindows</a><span class="token operator">: </span><a href="-time-windows/index.html">UFServiceConfigurationV2.TimeWindows</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1282729906%2FProperties%2F1079347412" anchor-label="timeWindows" id="-1282729906%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">configuration parameters for forced updates with time windows</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1309496587%2FProperties%2F1079347412" anchor-label="url" id="-1309496587%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="url.html"><span><span>url</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1309496587%2FProperties%2F1079347412"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"><a data-name="-1309496587%2FProperties%2F1079347412" anchor-label="url" id="-1309496587%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="url.html">url</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><div class="brief "><a data-name="-1309496587%2FProperties%2F1079347412" anchor-label="url" id="-1309496587%2FProperties%2F1079347412" data-filterable-set=":uf-client-service:uf-client-service-api:dokkaHtmlPartial/release"></a><p class="paragraph">The Update Server URL</p></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>Copyright @ 2024 Kynetics</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+
+</body></html>
+

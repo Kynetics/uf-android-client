@@ -1,0 +1,6 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:uf-client-service-api
+com.kynetics.uf.android.api
+com.kynetics.uf.android.api.v1
