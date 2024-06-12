@@ -18,7 +18,7 @@ android {
         minSdkVersion 19
         //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 30
-        versionCode 10600
+        versionCode 10601
         versionName versionFromGit(project)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
